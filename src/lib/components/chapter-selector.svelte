@@ -106,8 +106,7 @@
 						readonly
 					/>
 					<div class="flex-1">
-						<div class="font-semibold text-gray-900">บทที่ {chapter}</div>
-						<div class="text-sm text-blue-600 font-medium">{quizTitle}</div>
+						<div class="font-semibold text-sm text-blue-500">{quizTitle}</div>
 						<div class="text-sm text-gray-500">{questionCount} ข้อ</div>
 					</div>
 				</div>
@@ -115,21 +114,63 @@
 		{/each}
 	</div>
 
-	<!-- Summary & Start Button -->
+	<!-- Summary & Start Button - Sticky Bottom Bar -->
 	{#if selectedChapters.length > 0}
-		<div class="space-y-4 rounded-lg border border-blue-200 bg-blue-50 p-4">
-			<div class="text-center">
-				<div class="text-sm text-gray-600">จำนวนข้อที่เลือก</div>
-				<div class="text-2xl font-bold text-blue-600">{getTotalSelectedQuestions()} ข้อ</div>
+		<div class="sticky bottom-0 z-10 bg-white border-t-2 border-blue-200 shadow-lg">
+			<div class="p-4 space-y-3">
+				<!-- Timer Toggle Row -->
+				<div class="flex items-center justify-between">
+					<div class="flex items-center gap-2">
+						<span class="text-sm font-medium text-gray-700">Timer</span>
+						<button
+							type="button"
+							onclick={() => quizStore.toggleTimer()}
+							aria-label={quizStore.state.timer.enabled ? 'Disable timer' : 'Enable timer'}
+							class="relative inline-flex h-5 w-9 items-center rounded-full transition-colors {quizStore
+								.state.timer.enabled
+								? 'bg-blue-600'
+								: 'bg-gray-300'}"
+						>
+							<span
+								class="inline-block h-3 w-3 transform rounded-full bg-white transition-transform {quizStore
+									.state.timer.enabled
+									? 'translate-x-5'
+									: 'translate-x-1'}"
+							></span>
+						</button>
+						{#if quizStore.state.timer.enabled}
+							<input
+								type="number"
+								min="1"
+								max="180"
+								value={quizStore.state.timer.durationMinutes}
+								oninput={(e) => {
+									const value = parseInt((e.target as HTMLInputElement).value) || 5;
+									quizStore.setTimerDuration(Math.max(1, Math.min(180, value)));
+								}}
+								class="w-16 rounded border-gray-300 px-2 py-1 text-sm"
+								placeholder="min"
+							/>
+							<span class="text-xs text-gray-500">min</span>
+						{/if}
+					</div>
+
+					<!-- Question Count -->
+					<div class="text-sm text-gray-600">
+						<span class="font-semibold text-blue-600">{getTotalSelectedQuestions()}</span> questions
+					</div>
+				</div>
+
+				<!-- Start Button -->
+				<button
+					type="button"
+					onclick={handleStart}
+					disabled={!canStart}
+					class="w-full rounded-lg bg-blue-600 px-6 py-3 font-semibold text-white shadow-md transition-all hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-gray-300"
+				>
+					Start Quiz
+				</button>
 			</div>
-			<button
-				type="button"
-				onclick={handleStart}
-				disabled={!canStart}
-				class="w-full rounded-lg bg-blue-600 px-6 py-3 font-semibold text-white shadow-md transition-all hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-gray-300"
-			>
-				เริ่มทำแบบทดสอบ
-			</button>
 		</div>
 	{/if}
 </div>

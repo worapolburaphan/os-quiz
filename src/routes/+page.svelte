@@ -3,7 +3,6 @@
 	import { quizStore } from '$lib/stores/quiz-store.svelte';
 	import type { QuizData } from '$lib/types';
 	import ChapterSelector from '$lib/components/chapter-selector.svelte';
-	import TimerSettings from '$lib/components/timer-settings.svelte';
 	import ScoreDisplay from '$lib/components/score-display.svelte';
 	import SkipIndicator from '$lib/components/skip-indicator.svelte';
 	import Timer from '$lib/components/timer.svelte';
@@ -91,9 +90,6 @@
 		<!-- Chapter Selection Screen -->
 		<div class="py-8">
 			<ChapterSelector onStart={handleStartQuiz} onShowSessions={handleShowSessions} />
-			<div class="sticky bottom-4 mx-auto mt-6 max-w-2xl px-4">
-				<TimerSettings />
-			</div>
 		</div>
 	{:else if isQuizActive}
 		<!-- Quiz Screen -->
@@ -120,4 +116,3 @@
 {#if showSessionManager}
 	<SessionManager onClose={handleCloseSessions} />
 {/if}
-
