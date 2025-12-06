@@ -138,7 +138,8 @@
 											<div class="flex items-center gap-1">
 												<span class="text-gray-600">คะแนน:</span>
 												<span
-													class="font-semibold {session.scorePercentage && session.scorePercentage >= 80
+													class="font-semibold {session.scorePercentage &&
+													session.scorePercentage >= 80
 														? 'text-green-600'
 														: session.scorePercentage && session.scorePercentage >= 60
 															? 'text-blue-600'

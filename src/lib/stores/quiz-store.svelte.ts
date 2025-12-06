@@ -197,7 +197,16 @@ class QuizStore {
 
 	// Auto-save session
 	private autoSaveSession(isCompleted = false) {
-		if (!this.state.currentSessionId) return;
+		if (!this.state.currentSessionId) {
+			console.warn('⚠️ No currentSessionId - skipping auto-save');
+			return;
+		}
+
+		console.log('🔄 Auto-saving session:', this.state.currentSessionId, {
+			isCompleted,
+			answeredCount: this.answeredCount,
+			score: this.score
+		});
 
 		const session: QuizSession = {
 			id: this.state.currentSessionId,

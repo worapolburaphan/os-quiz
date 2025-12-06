@@ -15,11 +15,21 @@ const SESSIONS_LIST_KEY = '__sessions_list__';
  */
 export async function saveSession(session: QuizSession): Promise<void> {
 	try {
+		console.log('💾 Attempting to save session:', session.id, {
+			timestamp: session.timestamp,
+			chapters: session.selectedChapters,
+			totalQuestions: session.totalQuestions,
+			score: session.score,
+			isCompleted: session.isCompleted
+		});
+
 		// Serialize the session to ensure it's cloneable
 		const serializedSession = JSON.parse(JSON.stringify(session));
+		console.log('✅ Session serialized successfully');
 
 		// Save the full session
 		await sessionStore.setItem(session.id, serializedSession);
+		console.log('✅ Session saved to IndexedDB');
 
 		// Update sessions list
 		const metadata: SessionMetadata = {
@@ -32,22 +42,45 @@ export async function saveSession(session: QuizSession): Promise<void> {
 			isCompleted: session.isCompleted,
 			completedAt: session.completedAt
 		};
+		console.log('📋 Created metadata:', metadata);
 
 		const sessionsList = await getSessionsList();
+		console.log('📂 Current sessions list:', sessionsList);
+
 		const existingIndex = sessionsList.findIndex((s) => s.id === session.id);
+		console.log('🔍 Existing session index:', existingIndex);
 
 		if (existingIndex >= 0) {
 			sessionsList[existingIndex] = metadata;
+			console.log('🔄 Updated existing session at index', existingIndex);
 		} else {
 			sessionsList.push(metadata);
+			console.log('➕ Added new session to list');
 		}
 
 		// Sort by timestamp (newest first)
 		sessionsList.sort((a, b) => b.timestamp - a.timestamp);
+		console.log('📊 Sorted sessions list. Total:', sessionsList.length);
 
-		await sessionStore.setItem(SESSIONS_LIST_KEY, sessionsList);
+		try {
+			// Serialize the sessions list to ensure it's cloneable
+			const serializedList = JSON.parse(JSON.stringify(sessionsList));
+			console.log('🔄 Serialized sessions list:', serializedList);
+
+			await sessionStore.setItem(SESSIONS_LIST_KEY, serializedList);
+			console.log('✅ Sessions list updated in storage. Total sessions:', serializedList.length);
+		} catch (listError) {
+			console.error('❌ Error saving sessions list:', listError);
+			// Try without serialization as fallback
+			try {
+				await sessionStore.setItem(SESSIONS_LIST_KEY, sessionsList);
+				console.log('✅ Sessions list saved (without serialization)');
+			} catch (fallbackError) {
+				console.error('❌ Fallback save also failed:', fallbackError);
+			}
+		}
 	} catch (error) {
-		console.error('Error saving session:', error);
+		console.error('❌ Error saving session:', error);
 		throw error;
 	}
 }
@@ -70,7 +103,9 @@ export async function loadSession(sessionId: string): Promise<QuizSession | null
  */
 export async function getSessionsList(): Promise<SessionMetadata[]> {
 	try {
+		console.log('📖 Reading sessions list from storage...');
 		const list = await sessionStore.getItem<SessionMetadata[]>(SESSIONS_LIST_KEY);
+		console.log('📖 Sessions list retrieved:', list ? `${list.length} sessions` : 'null/empty');
 		return list || [];
 	} catch (error) {
 		console.error('Error getting sessions list:', error);
