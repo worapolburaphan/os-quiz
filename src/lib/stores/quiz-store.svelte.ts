@@ -1,5 +1,6 @@
 import type { QuizData, QuizQuestion, UserAnswer, QuizState, QuizSession } from '$lib/types';
 import { saveSession, loadSession, generateSessionId } from '$lib/storage/session-storage';
+import * as _ from 'lodash';
 
 class QuizStore {
 	state = $state<QuizState>({
@@ -48,9 +49,22 @@ class QuizStore {
 	// Start quiz
 	startQuiz() {
 		// Combine selected quizzes
-		this.state.combinedQuestions = this.state.selectedChapters
-			.map((chapter) => this.state.allQuizzes[chapter - 1]?.questions || [])
-			.flat();
+		this.state.combinedQuestions = _.shuffle(
+			this.state.selectedChapters
+				.map((chapter) => this.state.allQuizzes[chapter - 1]?.questions || [])
+				.flat()
+				.map((question) => {
+					const answer = question.choices[question.answer];
+					const shuffleChoices = _.shuffle(question.choices);
+					const answerIndex = shuffleChoices.indexOf(answer);
+					const newQuestion = {
+						...question,
+						choices: shuffleChoices,
+						answer: answerIndex
+					};
+					return newQuestion;
+				})
+		);
 
 		// Initialize user answers
 		this.state.userAnswers = this.state.combinedQuestions.map((_, index) => ({

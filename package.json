@@ -23,6 +23,7 @@
 		"@tailwindcss/typography": "^0.5.19",
 		"@tailwindcss/vite": "^4.1.17",
 		"@types/localforage": "^0.0.34",
+		"@types/lodash": "^4.17.21",
 		"@types/node": "^22",
 		"eslint": "^9.39.1",
 		"eslint-config-prettier": "^10.1.8",
@@ -40,6 +41,7 @@
 		"vite-plugin-devtools-json": "^1.0.0"
 	},
 	"dependencies": {
-		"localforage": "^1.10.0"
+		"localforage": "^1.10.0",
+		"lodash": "^4.17.21"
 	}
 }

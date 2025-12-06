@@ -15,8 +15,11 @@ const SESSIONS_LIST_KEY = '__sessions_list__';
  */
 export async function saveSession(session: QuizSession): Promise<void> {
 	try {
+		// Serialize the session to ensure it's cloneable
+		const serializedSession = JSON.parse(JSON.stringify(session));
+
 		// Save the full session
-		await sessionStore.setItem(session.id, session);
+		await sessionStore.setItem(session.id, serializedSession);
 
 		// Update sessions list
 		const metadata: SessionMetadata = {
