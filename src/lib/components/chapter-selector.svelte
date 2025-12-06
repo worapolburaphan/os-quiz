@@ -122,8 +122,8 @@
 			<div class="p-4 space-y-3">
 				<!-- Timer Toggle Row -->
 				<div class="flex items-center justify-between">
-					<div class="flex items-center gap-2">
-						<span class="text-sm font-medium text-gray-700">Timer</span>
+					<div class="flex items-center w-full gap-2 h-8">
+						<span class="text-sm font-medium text-gray-700">จำกัดเวลาทำแบบทดสอบ</span>
 						<button
 							type="button"
 							onclick={() => quizStore.toggleTimer()}
@@ -150,7 +150,7 @@
 									const value = parseInt((e.target as HTMLInputElement).value) || 5;
 									quizStore.setTimerDuration(Math.max(1, Math.min(180, value)));
 								}}
-								class="w-16 rounded border-gray-300 px-2 py-1 text-sm"
+								class="w-20rounded border-gray-300 px-2 py-1 text-sm"
 								placeholder="min"
 							/>
 							<span class="text-xs text-gray-500">min</span>
