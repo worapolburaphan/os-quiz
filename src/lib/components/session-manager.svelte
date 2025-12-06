@@ -12,6 +12,7 @@
 
 	let sessions = $state<SessionMetadata[]>([]);
 	let isLoading = $state(true);
+	let deletingSessionId = $state<string | null>(null);
 
 	onMount(async () => {
 		await loadSessions();
@@ -35,10 +36,40 @@
 		onClose();
 	}
 
-	async function handleDeleteSession(sessionId: string) {
-		if (confirm('คุณต้องการลบ session นี้หรือไม่?')) {
+	async function handleDeleteSession(event: Event, sessionId: string) {
+		// Prevent event bubbling and default behavior
+		event.stopPropagation();
+		event.preventDefault();
+
+		// Prevent multiple simultaneous delete operations
+		if (deletingSessionId) {
+			console.log('⚠️ Already deleting a session, ignoring click');
+			return;
+		}
+
+		// Set state BEFORE confirm to block re-entry immediately
+		deletingSessionId = sessionId;
+		console.log('🗑️ Preparing to delete session:', sessionId);
+
+		// Show confirm dialog
+		const confirmed = confirm('คุณต้องการลบ session นี้หรือไม่?');
+
+		if (!confirmed) {
+			// User cancelled, reset state
+			deletingSessionId = null;
+			console.log('❌ Deletion cancelled by user');
+			return;
+		}
+
+		try {
+			console.log('🗑️ Deleting session...');
 			await deleteSession(sessionId);
 			await loadSessions();
+			console.log('✅ Session deleted successfully');
+		} catch (error) {
+			console.error('❌ Error deleting session:', error);
+		} finally {
+			deletingSessionId = null;
 		}
 	}
 
@@ -180,10 +211,11 @@
 									{/if}
 									<button
 										type="button"
-										onclick={() => handleDeleteSession(session.id)}
-										class="rounded-lg border border-red-300 bg-white px-4 py-2 text-sm font-medium text-red-600 transition-colors hover:bg-red-50"
+										onclick={(e) => handleDeleteSession(e, session.id)}
+										disabled={deletingSessionId === session.id}
+										class="rounded-lg border border-red-300 bg-white px-4 py-2 text-sm font-medium text-red-600 transition-colors hover:bg-red-50 disabled:cursor-not-allowed disabled:opacity-50"
 									>
-										ลบ
+										{deletingSessionId === session.id ? 'กำลังลบ...' : 'ลบ'}
 									</button>
 								</div>
 							</div>
