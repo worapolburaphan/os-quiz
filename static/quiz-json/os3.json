@@ -1,0 +1,205 @@
+{
+  "title": "ผลการทำแบบทดสอบบทที่ 3",
+  "questions": [
+    {
+      "question": "ข้อใดคือคำนิยามที่ถูกต้องที่สุดของ \"โปรเซส\" (Process)",
+      "choices": [
+        "โปรแกรมที่กำลังถูกประมวลผล",
+        "โปรแกรมที่จัดเก็บอยู่ในฮาร์ดดิสก์",
+        "หน่วยความจำที่ถูกจัดสรรโดยระบบปฏิบัติการ",
+        "ไฟล์โค้ดโปรแกรมต้นฉบับ"
+      ],
+      "answer": 0
+    },
+    {
+      "question": "ส่วนใดของโปรเซสที่ใช้สำหรับเก็บตัวแปรแบบโกลบอล (global variables)",
+      "choices": [
+        "Stack section",
+        "Data section",
+        "Text section",
+        "Heap section"
+      ],
+      "answer": 1
+    },
+    {
+      "question": "โปรเซสจะอยู่ในสถานะใด เมื่อกำลังรอการทำงาน I/O (Input/Output)",
+      "choices": [
+        "Running",
+        "Ready",
+        "Terminated",
+        "Waiting"
+      ],
+      "answer": 3
+    },
+    {
+      "question": "โครงสร้างข้อมูลใดของเคอร์เนลที่ใช้เก็บข้อมูลทั้งหมดเกี่ยวกับโปรเซสหนึ่งๆ",
+      "choices": [
+        "Ready Queue",
+        "Program Counter (PC)",
+        "Process ID (PID)",
+        "Process Control Block (PCB)"
+      ],
+      "answer": 3
+    },
+    {
+      "question": "การทำงานใดที่เกี่ยวข้องกับการบันทึกสถานะของโปรเซสหนึ่ง และโหลดสถานะของอีกโปรเซสหนึ่งเพื่อเข้าสู่การประมวลผล",
+      "choices": [
+        "Process creation",
+        "Process synchronization",
+        "Process termination",
+        "Context switch"
+      ],
+      "answer": 3
+    },
+    {
+      "question": "System call ใดที่ใช้ในการสร้างโปรเซสลูกในระบบ UNIX",
+      "choices": [
+        "`fork()`",
+        "`CreateProcess()`",
+        "`exec()`",
+        "`wait()`"
+      ],
+      "answer": 0
+    },
+    {
+      "question": "ข้อใดไม่ใช่กลไกการสื่อสารระหว่างโปรเซส (IPC) ที่กล่าวถึงในเรื่องของโปรเซส",
+      "choices": [
+        "HTTP",
+        "Pipes",
+        "Shared memory",
+        "Sockets"
+      ],
+      "answer": 0
+    },
+    {
+      "question": "กลไก IPC แบบใดที่ต้องใช้ความสัมพันธ์แบบแม่-ลูก (parent-child) ระหว่างโปรเซสที่สื่อสารกัน",
+      "choices": [
+        "Ordinary pipes",
+        "Shared memory",
+        "Sockets",
+        "Named pipes"
+      ],
+      "answer": 0
+    },
+    {
+      "question": "ในระบบ UNIX, `fd[0]` และ `fd[1]` ของ Ordinary pipe คืออะไร",
+      "choices": [
+        "`fd[0]` คือปลายอ่าน(read end), `fd[1]` คือปลายเขียน(write end)",
+        "`fd[0]` คือปลายเขียน(write end), `fd[1]` คือปลายอ่าน(read end)",
+        "ทั้งคู่คือปลายอ่านและเขียน",
+        "ทั้งคู่คือปลายสำหรับจัดการหน่วยความจำร่วม"
+      ],
+      "answer": 0
+    },
+    {
+      "question": "\"Named pipes\" แตกต่างจาก \"Ordinary pipes\" อย่างไร",
+      "choices": [
+        "Named pipes ไม่ต้องมีความสัมพันธ์แบบแม่-ลูก",
+        "Named pipes ไม่สามารถสื่อสารข้ามเครือข่ายได้",
+        "Named pipes เป็นแบบสองทิศทาง ในขณะที่ Ordinary pipes เป็นแบบทิศทางเดียว",
+        "Named pipes ใช้งานได้เฉพาะบนระบบ Windows เท่านั้น"
+      ],
+      "answer": 0
+    },
+    {
+      "question": "\"Socket\" คืออะไรในบริบทของการสื่อสารแบบไคลเอนต์-เซิร์ฟเวอร์",
+      "choices": [
+        "endpoint ที่ระบุด้วยที่อยู่ IP และหมายเลขพอร์ต",
+        "โปรแกรมที่ทำหน้าที่รับส่งข้อมูล",
+        "หมายเลขพอร์ตที่ใช้ในการสื่อสาร",
+        "ที่อยู่ IP ของเครื่องคอมพิวเตอร์"
+      ],
+      "answer": 0
+    },
+    {
+      "question": "ในการสื่อสารด้วย Socket แบบ TCP การเชื่อมต่อหนึ่งๆ ประกอบด้วย Socket จำนวนกี่คู่",
+      "choices": [
+        "1 คู่",
+        "2 คู่",
+        "3 คู่",
+        "4 คู่"
+      ],
+      "answer": 0
+    },
+    {
+      "question": "การสื่อสารแบบใดที่ถือว่าเป็น \"low-level\" เนื่องจากข้อมูลที่ส่งเป็นเพียง stream of bytes ที่ไม่มีโครงสร้าง",
+      "choices": [
+        "Sockets",
+        "Message passing",
+        "Remote Procedure Calls (RPCs)",
+        "Named pipes"
+      ],
+      "answer": 0
+    },
+    {
+      "question": "กลไกใดที่ทำให้ไคลเอนต์สามารถเรียกใช้ฟังก์ชันบนเซิร์ฟเวอร์ที่อยู่คนละเครื่องได้เสมือนการเรียกใช้ฟังก์ชันในเครื่องตัวเอง",
+      "choices": [
+        "Remote Procedure Call (RPC)",
+        "Advanced Local Procedure Call (ALPC)",
+        "POSIX Shared Memory",
+        "Mach Message Passing"
+      ],
+      "answer": 0
+    },
+    {
+      "question": "ส่วนใดของระบบ RPC ที่ทำหน้าที่แปลงพารามิเตอร์ให้อยู่ในรูปแบบมาตรฐานก่อนส่งข้ามเครือข่าย",
+      "choices": [
+        "Client stub",
+        "Server stub",
+        "Rendezvous daemon",
+        "RPC daemon"
+      ],
+      "answer": 0
+    },
+    {
+      "question": "ในระบบ Windows, กลไกการสื่อสารแบบใดที่ใช้ในการสื่อสารระหว่างโปรเซสในเครื่องเดียวกัน",
+      "choices": [
+        "Advanced Local Procedure Call (ALPC)",
+        "Sockets",
+        "Pipes",
+        "Remote Procedure Call (RPC)"
+      ],
+      "answer": 0
+    },
+    {
+      "question": "ข้อใดคือคำสั่งที่ใช้สร้าง Pipe ในระบบ UNIX",
+      "choices": [
+        "`pipe()`",
+        "`CreatePipe()`",
+        "`shm_open()`",
+        "`mkfifo()`"
+      ],
+      "answer": 0
+    },
+    {
+      "question": "ในระบบ Android, กลไกใดที่ใช้เป็นรูปแบบของ IPC ผ่าน binder framework",
+      "choices": [
+        "Remote Procedure Calls (RPCs)",
+        "Sockets",
+        "Pipes",
+        "Shared memory"
+      ],
+      "answer": 0
+    },
+    {
+      "question": "จากโค้ดโปรแกรม โปรเซสลูกเปลี่ยนค่า `value` แต่ทำไมโปรเซสแม่จึงไม่ได้รับผลกระทบ",
+      "choices": [
+        "โปรเซสลูกมีสำเนาของ `value` ที่แยกจากโปรเซสแม่",
+        "โปรเซสลูกไม่สามารถแก้ไขตัวแปรของโปรเซสแม่ได้",
+        "`wait(NULL)` ป้องกันการเปลี่ยนแปลงตัวแปร",
+        "โปรเซสแม่ทำงานเสร็จก่อนโปรเซสลูก"
+      ],
+      "answer": 0
+    },
+    {
+      "question": "ในระบบ Mach, การสื่อสารระหว่างโปรเซสจะเกิดขึ้นผ่านโครงสร้างที่เรียกว่าอะไร",
+      "choices": [
+        "Ports",
+        "Mailboxes",
+        "Signals",
+        "Queues"
+      ],
+      "answer": 0
+    }
+  ]
+}

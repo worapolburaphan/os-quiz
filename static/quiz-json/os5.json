@@ -1,0 +1,205 @@
+{
+  "title": "ผลการทำแบบทดสอบบทที่ 5",
+  "questions": [
+    {
+      "question": "เกณฑ์ใดที่ใช้วัดจำนวนโปรเซสที่ทำงานเสร็จในหนึ่งหน่วยเวลา",
+      "choices": [
+        "Response Time",
+        "CPU Utilization",
+        "Throughput",
+        "Waiting Time"
+      ],
+      "answer": 2
+    },
+    {
+      "question": "อัลกอริทึม First-Come, First-Served (FCFS) อาจก่อให้เกิดปัญหาใดได้",
+      "choices": [
+        "Starvation",
+        "Deadlock",
+        "Priority Inversion",
+        "Convoy Effect"
+      ],
+      "answer": 3
+    },
+    {
+      "question": "อัลกอริทึมใดที่เหมาะกับการใช้งานในระบบแบบโต้ตอบ (Interactive System) มากที่สุด",
+      "choices": [
+        "Priority Scheduling (Preemptive)",
+        "Round-Robin (RR)",
+        "First-Come, First-Served (FCFS)",
+        "Shortest-Job-First (SJF)"
+      ],
+      "answer": 1
+    },
+    {
+      "question": "หากใช้การจัดตารางเวลาแบบ Shortest-Job-First (SJF) ที่เป็นแบบ Non-preemptive โปรเซสที่สั้นที่สุดจะถูกเลือกเมื่อใด",
+      "choices": [
+        "เมื่อซีพียูว่าง",
+        "เมื่อโปรเซสปัจจุบันทำงานเสร็จ",
+        "เมื่อโปรเซสปัจจุบันถูกขัดจังหวะ",
+        "เมื่อเข้ามาใน Ready Queue"
+      ],
+      "answer": 1
+    },
+    {
+      "question": "การจัดตารางเวลาแบบใดที่ใช้กลไก Aging เพื่อแก้ปัญหา Starvation",
+      "choices": [
+        "Round-Robin",
+        "Multilevel Queue",
+        "First-Come, First-Served",
+        "Priority Scheduling"
+      ],
+      "answer": 3
+    },
+    {
+      "question": "ความแตกต่างที่สำคัญระหว่าง Multilevel Queue และ Multilevel Feedback Queue คืออะไร",
+      "choices": [
+        "Multilevel Queue ใช้ Round-Robin เสมอ",
+        "Multilevel Feedback Queue มีคิวจำนวนมากกว่า",
+        "Multilevel Feedback Queue อนุญาตให้โปรเซสย้ายคิวได้",
+        "Multilevel Queue อนุญาตให้โปรเซสย้ายคิวได้"
+      ],
+      "answer": 2
+    },
+    {
+      "question": "ข้อใดคือคุณสมบัติของระบบ Hard Real-Time",
+      "choices": [
+        "เป้าหมายหลักคือการเพิ่ม Throughput",
+        "สามารถยอมรับการพลาด Deadline ได้เล็กน้อย",
+        "การพลาด Deadline แม้แต่ครั้งเดียวทำให้เกิดความเสียหายร้ายแรง",
+        "ไม่มีความจำเป็นต้องใช้การจัดตารางเวลา"
+      ],
+      "answer": 2
+    },
+    {
+      "question": "อัลกอริทึม Rate-Monotonic Scheduling (RMS) ให้ Priority กับโปรเซสตามเกณฑ์ใด",
+      "choices": [
+        "โปรเซสที่มี Deadline ใกล้ที่สุด",
+        "โปรเซสที่มี Period สั้นที่สุด",
+        "โปรเซสที่ใช้เวลาในการประมวลผลสั้นที่สุด",
+        "โปรเซสที่เข้าคิวมาก่อน"
+      ],
+      "answer": 1
+    },
+    {
+      "question": "การจัดตารางเวลาเธรดในระบบ Multiprocessing แบบ Symmetric (SMP) มีลักษณะอย่างไร",
+      "choices": [
+        "ทุกแกนประมวลผลใช้ Ready Queue ร่วมกัน",
+        "มีแกนประมวลผลหนึ่งทำหน้าที่ควบคุมการจัดตารางเวลาทั้งหมด",
+        "มีการจัดการแบบ Fixed-Priority เสมอ",
+        "แต่ละแกนประมวลผลมี Ready Queue ของตัวเอง"
+      ],
+      "answer": 0
+    },
+    {
+      "question": "การที่ระบบพยายามให้โปรเซสกลับไปทำงานบนแกนประมวลผลเดิมที่เคยทำ เพื่อใช้ประโยชน์จาก Cache เรียกว่าอะไร",
+      "choices": [
+        "Processor Migration",
+        "Load Balancing",
+        "Soft Affinity",
+        "Hard Affinity"
+      ],
+      "answer": 2
+    },
+    {
+      "question": "อะไรคือข้อเสียหลักของอัลกอริทึม Earliest-Deadline-First (EDF)",
+      "choices": [
+        "มีต้นทุนในการจัดการสูง",
+        "ทำให้เกิด Starvation",
+        "ใช้ซีพียูได้ไม่เต็มประสิทธิภาพ",
+        "ไม่เหมาะกับงานแบบเรียลไทม์"
+      ],
+      "answer": 0
+    },
+    {
+      "question": "ในระบบปฏิบัติการ Linux, Completely Fair Scheduler (CFS) ใช้เกณฑ์ใดในการจัดตารางเวลา",
+      "choices": [
+        "CPU Utilization",
+        "Priority",
+        "Virtual Run Time (vruntime)",
+        "Time Quantum"
+      ],
+      "answer": 2
+    },
+    {
+      "question": "ข้อใดคือเหตุผลหลักในการใช้เธรดระดับเคอร์เนล (Kernel-level threads)",
+      "choices": [
+        "การสลับเธรดทำได้เร็วกว่า",
+        "โปรเซสจะไม่ถูกบล็อกหากเธรดหนึ่งถูกบล็อก",
+        "การจัดการมีความซับซ้อนน้อยกว่า",
+        "สามารถใช้ประโยชน์จากซีพียูหลายแกนได้"
+      ],
+      "answer": 3
+    },
+    {
+      "question": "Dispatch Latency คือช่วงเวลาใด",
+      "choices": [
+        "เวลาที่โปรเซสอยู่ใน Ready Queue",
+        "เวลาที่โปรเซสใช้ในการประมวลผลทั้งหมด",
+        "เวลาที่ใช้ในการสลับจากโปรเซสหนึ่งไปอีกโปรเซสหนึ่ง",
+        "เวลาตั้งแต่การเกิด Interrupt จนถึงการจัดการ"
+      ],
+      "answer": 2
+    },
+    {
+      "question": "ในระบบปฏิบัติการ Windows, Dynamic Priority Boosting มีจุดประสงค์หลักเพื่ออะไร",
+      "choices": [
+        "เพื่อลดปัญหา Starvation ของเธรดที่รอนาน",
+        "เพื่อลดจำนวน Context Switch",
+        "เพื่อเพิ่ม Priority ให้กับเธรดที่เพิ่งถูกสร้างขึ้น",
+        "เพื่อให้โปรเซสทำงานแบบ Real-Time ได้"
+      ],
+      "answer": 0
+    },
+    {
+      "question": "การใช้ Load Balancing แบบ Push Migration มีลักษณะอย่างไร",
+      "choices": [
+        "ซีพียูที่มีงานมากจะผลักงานไปยังซีพียูที่มีงานน้อย",
+        "โปรเซสถูกย้ายไปมาระหว่างซีพียูแบบสุ่ม",
+        "ซีพียูที่มีงานน้อยจะดึงงานจากซีพียูที่มีงานมาก",
+        "โปรเซสที่มี Priority สูงจะถูกย้ายไปยังซีพียูที่ว่าง"
+      ],
+      "answer": 0
+    },
+    {
+      "question": "ข้อใดคือข้อเสียหลักของการใช้วิธี Deterministic Modeling ในการประเมินอัลกอริทึม",
+      "choices": [
+        "ผลลัพธ์ที่ได้อาจไม่เป็นไปตามความเป็นจริง",
+        "ไม่สามารถเปรียบเทียบระหว่างอัลกอริทึมได้",
+        "ใช้เวลานานและซับซ้อน",
+        "ไม่สามารถนำไปใช้กับงานจริงได้"
+      ],
+      "answer": 0
+    },
+    {
+      "question": "ใน Multilevel Feedback Queue หากโปรเซสใช้เวลานานเกิน Time Quantum ที่กำหนดไว้ในคิว จะเกิดอะไรขึ้นกับโปรเซสนั้น",
+      "choices": [
+        "ได้รับ Time Quantum ที่ยาวขึ้น",
+        "ถูกลดระดับ (Downgrade) ไปยังคิวที่ต่ำลง",
+        "ถูกเลื่อนระดับ (Upgrade) ไปยังคิวที่สูงขึ้น",
+        "ถูกนำออกจากระบบทันที"
+      ],
+      "answer": 1
+    },
+    {
+      "question": "การใช้โปรแกรมจำลอง (Simulation) ในการประเมินอัลกอริทึมมีข้อดีอย่างไร",
+      "choices": [
+        "สามารถนำไปใช้กับอัลกอริทึมที่ซับซ้อนได้",
+        "มีค่าใช้จ่ายในการพัฒนาต่ำ",
+        "สะท้อนสภาพการทำงานจริงได้แม่นยำ 100%",
+        "ให้ผลลัพธ์ที่แน่นอนและทำซ้ำได้ง่าย"
+      ],
+      "answer": 0
+    },
+    {
+      "question": "เป้าหมายหลักของการจัดตารางเวลาซีพียูในระบบปฏิบัติการสมัยใหม่คืออะไร",
+      "choices": [
+        "การเพิ่ม Waiting Time ให้สูงสุด",
+        "การลดจำนวน Context Switch ให้มากที่สุด",
+        "การบังคับให้ทุกโปรเซสมี Priority เท่ากัน",
+        "การเพิ่ม CPU Utilization และ Throughput ให้สูงสุด"
+      ],
+      "answer": 3
+    }
+  ]
+}

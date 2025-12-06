@@ -1,0 +1,205 @@
+{
+  "title": "ผลการทำแบบทดสอบบทที่ 4",
+  "questions": [
+    {
+      "question": "ปัญหาใดที่เกิดขึ้นเมื่อโปรเซสตั้งแต่สองตัวขึ้นไปเข้าถึงและจัดการข้อมูลที่ใช้ร่วมกันพร้อมๆ กัน และผลลัพธ์สุดท้ายขึ้นอยู่กับลำดับการทำงาน",
+      "choices": [
+        "Deadlock",
+        "Starvation",
+        "Race Condition",
+        "Context Switching"
+      ],
+      "answer": 2
+    },
+    {
+      "question": "ในส่วนของโค้ดโปรเซส, ส่วนใดที่เข้าถึงทรัพยากรที่ใช้ร่วมกันและจำเป็นต้องมีการควบคุมการเข้าถึงอย่างเคร่งครัด",
+      "choices": [
+        "Critical Section",
+        "Exit Section",
+        "Remainder Section",
+        "Entry Section"
+      ],
+      "answer": 0
+    },
+    {
+      "question": "เงื่อนไขใดในสามข้อของการแก้ปัญหาในส่วนวิกฤตที่กล่าวว่า 'เมื่อโปรเซสหนึ่งอยู่ในส่วนวิกฤต จะต้องไม่มีโปรเซสอื่นใดได้รับอนุญาตให้เข้าสู่ส่วนวิกฤต'",
+      "choices": [
+        "Progress",
+        "Bounded Waiting",
+        "Mutual Exclusion",
+        "Synchronization"
+      ],
+      "answer": 2
+    },
+    {
+      "question": "วิธีแก้ปัญหาของปีเตอร์สันใช้ตัวแปรที่ใช้ร่วมกันสองตัวคืออะไร",
+      "choices": [
+        "count และ lock",
+        "mutex และ available",
+        "turn และ flag",
+        "wait และ signal"
+      ],
+      "answer": 2
+    },
+    {
+      "question": "คำสั่งฮาร์ดแวร์แบบใดที่อ่านค่าของตัวแปรเป้าหมายและกำหนดค่าใหม่ให้เป็น true ในขั้นตอนเดียวที่ไม่สามารถถูกขัดจังหวะได้",
+      "choices": [
+        "Test-and-Set",
+        "Atomic Lock",
+        "Compare-and-Swap (CAS)",
+        "Memory Barrier"
+      ],
+      "answer": 0
+    },
+    {
+      "question": "ปัญหาหลักของ Mutex Locks แบบง่ายๆ ที่ทำให้โปรเซสสิ้นเปลืองเวลา CPU ในการรอคอยคืออะไร",
+      "choices": [
+        "Starvation",
+        "Race Condition",
+        "Busy Waiting (Spinlock)",
+        "Deadlock"
+      ],
+      "answer": 2
+    },
+    {
+      "question": "คำสั่งหลักสองคำสั่งที่ใช้ในการทำงานกับ Semaphores คืออะไร",
+      "choices": [
+        "lock() และ unlock()",
+        "request() และ free()",
+        "wait() และ signal()",
+        "acquire() และ release()"
+      ],
+      "answer": 2
+    },
+    {
+      "question": "Semaphores ประเภทใดที่ใช้สำหรับจัดการทรัพยากรที่มีจำนวนจำกัดมากกว่าหนึ่ง",
+      "choices": [
+        "Mutex",
+        "Counting Semaphore",
+        "Binary Semaphore",
+        "Resource Semaphore"
+      ],
+      "answer": 1
+    },
+    {
+      "question": "ปัญหาคลาสสิกใดที่แสดงให้เห็นถึงปัญหา Deadlock เมื่อโปรเซสหลายตัวต่างฝ่ายต่างรอทรัพยากรที่อีกฝ่ายถือครองอยู่",
+      "choices": [
+        "Readers-Writers Problem",
+        "Synchronization Problem",
+        "Bounded-Buffer Problem",
+        "The Dining-Philosophers Problem"
+      ],
+      "answer": 3
+    },
+    {
+      "question": "Monitor แก้ปัญหาการกีดกันซึ่งกันและกัน (Mutual Exclusion) อย่างไร",
+      "choices": [
+        "โดยการใช้คำสั่ง lock() และ unlock() อัตโนมัติ",
+        "โดยการบังคับให้มีเพียงโปรเซสเดียวที่ทำงานภายใน Monitor ได้ในแต่ละช่วงเวลา",
+        "โดยการใช้ Mutex Locks ภายใน Monitor",
+        "โดยการใช้ Condition Variables เพื่อรอการปลดล็อก"
+      ],
+      "answer": 1
+    },
+    {
+      "question": "ใน Monitor, คำสั่งใดที่ใช้สำหรับระงับการทำงานของโปรเซสและนำไปไว้ในคิวรอ (Waiting Queue) เมื่อเงื่อนไขยังไม่เป็นจริง",
+      "choices": [
+        "x.release()",
+        "x.await()",
+        "x.signal()",
+        "x.wait()"
+      ],
+      "answer": 3
+    },
+    {
+      "question": "กลไกการประสานการทำงานในเคอร์เนลของ Windows ที่สามารถจัดการกับ Mutexes, Semaphores และ Events คืออะไร",
+      "choices": [
+        "Memory Barriers",
+        "Dispatcher Objects",
+        "Spinlocks",
+        "Atomic Integers"
+      ],
+      "answer": 1
+    },
+    {
+      "question": "ในระบบปฏิบัติการ Linux, กลไกใดที่ถูกนำมาใช้สำหรับการล็อกแบบสั้นๆ และทำงานแบบ Busy Waiting ในระบบ Multiprocessor",
+      "choices": [
+        "Reader-Writer Locks",
+        "Spinlocks",
+        "Semaphores",
+        "Mutexes"
+      ],
+      "answer": 1
+    },
+    {
+      "question": "ในไลบรารี Pthreads, เครื่องมือใดที่ทำงานร่วมกับ Mutex Locks เพื่อให้เธรดสามารถรอเงื่อนไขบางอย่างให้เป็นจริงได้",
+      "choices": [
+        "Condition Variables",
+        "Monitors",
+        "Semaphores",
+        "Spinlocks"
+      ],
+      "answer": 0
+    },
+    {
+      "question": "คำสั่งใดใน Java ที่เป็นกลไกการซิงโครไนซ์พื้นฐานที่สุดและทำงานเหมือนกับ Mutex Lock ที่สร้างขึ้นโดยอัตโนมัติ",
+      "choices": [
+        "wait()",
+        "synchronized",
+        "acquire()",
+        "lock()"
+      ],
+      "answer": 1
+    },
+    {
+      "question": "แนวคิดเรื่อง Transactional Memory มีจุดประสงค์หลักเพื่อแก้ปัญหาใดในการเขียนโปรแกรมแบบขนาน",
+      "choices": [
+        "ลดความยุ่งยากในการใช้ Mutex Locks",
+        "Starvation",
+        "Deadlock",
+        "การจัดเรียงคำสั่งใหม่"
+      ],
+      "answer": 0
+    },
+    {
+      "question": "ในเทคนิค Lock-free Programming, คำสั่ง Atomic ใดที่เป็นหัวใจหลักในการอัปเดตข้อมูล",
+      "choices": [
+        "Compare-and-Swap (CAS)",
+        "Atomic Lock",
+        "Test-and-Set",
+        "Atomic Increment"
+      ],
+      "answer": 0
+    },
+    {
+      "question": "ใน Readers-Writers Problem, เงื่อนไขใดที่ทำให้เกิดภาวะ Starvation สำหรับผู้เขียน",
+      "choices": [
+        "มีผู้อ่านเข้าออกข้อมูลอย่างต่อเนื่อง",
+        "มีผู้เขียนรอเข้าถึงข้อมูลหลายคน",
+        "มีผู้เขียนเข้าออกข้อมูลพร้อมกันหลายคน",
+        "มีผู้อ่านเพียงคนเดียวที่เข้าถึงข้อมูล"
+      ],
+      "answer": 0
+    },
+    {
+      "question": "ใน Monitor, คำสั่งใดที่ใช้เพื่อปลุกโปรเซสที่กำลังรออยู่ในคิว",
+      "choices": [
+        "x.wait()",
+        "x.wakeup()",
+        "x.signal()",
+        "x.notify()"
+      ],
+      "answer": 2
+    },
+    {
+      "question": "ในกลไก RCU (Read-Copy-Update) ผู้เขียนจะทำการอัปเดตข้อมูลอย่างไร",
+      "choices": [
+        "ล็อกข้อมูลและทำการแก้ไข",
+        "ขอสิทธิ์การเขียนจากผู้อ่านทั้งหมดก่อน",
+        "แก้ไขข้อมูลเดิมโดยตรง",
+        "คัดลอกข้อมูลและแก้ไขสำเนา จากนั้นเปลี่ยนพอยน์เตอร์ไปยังสำเนาใหม่"
+      ],
+      "answer": 3
+    }
+  ]
+}
