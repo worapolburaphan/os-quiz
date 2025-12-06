@@ -86,7 +86,7 @@
 	</div>
 
 	<!-- Chapter List -->
-	<div class="grid gap-3 sm:grid-cols-2 max-h-96 overflow-y-auto">
+	<div class="grid gap-3 sm:grid-cols-2">
 		{#each chapters as chapter}
 			{@const isSelected = selectedChapters.includes(chapter)}
 			{@const questionCount = getQuestionCount(chapter)}
@@ -116,7 +116,9 @@
 
 	<!-- Summary & Start Button - Sticky Bottom Bar -->
 	{#if selectedChapters.length > 0}
-		<div class="sticky bottom-0 z-10 bg-white border-t-2 border-blue-200 shadow-lg">
+		<div
+			class="sticky bottom-0 rounded-2xl z-10 bg-blue-500/5 backdrop-blur-md border border-gray-200 shadow-lg"
+		>
 			<div class="p-4 space-y-3">
 				<!-- Timer Toggle Row -->
 				<div class="flex items-center justify-between">
@@ -128,7 +130,7 @@
 							aria-label={quizStore.state.timer.enabled ? 'Disable timer' : 'Enable timer'}
 							class="relative inline-flex h-5 w-9 items-center rounded-full transition-colors {quizStore
 								.state.timer.enabled
-								? 'bg-blue-600'
+								? 'bg-blue-600 shadow-lg shadow-blue-500/50'
 								: 'bg-gray-300'}"
 						>
 							<span
@@ -166,7 +168,7 @@
 					type="button"
 					onclick={handleStart}
 					disabled={!canStart}
-					class="w-full rounded-lg bg-blue-600 px-6 py-3 font-semibold text-white shadow-md transition-all hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-gray-300"
+					class="w-full rounded-lg bg-blue-600 px-6 py-3 font-semibold text-white shadow-lg shadow-blue-500/50 transition-all hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-gray-300"
 				>
 					Start Quiz
 				</button>
