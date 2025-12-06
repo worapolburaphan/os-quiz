@@ -3,8 +3,6 @@
 
 	const currentQuestion = $derived(quizStore.currentQuestion);
 	const currentAnswer = $derived(quizStore.currentAnswer);
-	const currentQuestionIndex = $derived(quizStore.state.currentQuestionIndex);
-	const totalQuestions = $derived(quizStore.totalQuestions);
 
 	let selectedChoice = $state<number | null>(null);
 	let showFeedback = $state(false);
@@ -19,21 +17,8 @@
 
 	function handleChoiceSelect(index: number) {
 		if (!showFeedback) {
-			selectedChoice = index;
+			quizStore.selectChoice(index);
 		}
-	}
-
-	function handleSubmitAnswer() {
-		if (selectedChoice !== null && !showFeedback) {
-			quizStore.submitAnswer(selectedChoice);
-			showFeedback = true;
-		}
-	}
-
-	function handleNext() {
-		quizStore.nextQuestion();
-		selectedChoice = null;
-		showFeedback = false;
 	}
 
 	function getChoiceClass(index: number): string {

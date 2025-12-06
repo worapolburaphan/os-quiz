@@ -32,4 +32,29 @@ export interface QuizState {
 	combinedQuestions: QuizQuestion[];
 	userAnswers: UserAnswer[];
 	timer: TimerState;
+	currentSessionId?: string;
+}
+
+export interface QuizSession {
+	id: string;
+	timestamp: number;
+	selectedChapters: number[];
+	combinedQuestions: QuizQuestion[];
+	userAnswers: UserAnswer[];
+	score: number;
+	totalQuestions: number;
+	scorePercentage: number;
+	completedAt?: number;
+	isCompleted: boolean;
+}
+
+export interface SessionMetadata {
+	id: string;
+	timestamp: number;
+	selectedChapters: number[];
+	totalQuestions: number;
+	score?: number;
+	scorePercentage?: number;
+	isCompleted: boolean;
+	completedAt?: number;
 }

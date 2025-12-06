@@ -9,16 +9,11 @@
 	const answeredCount = $derived(quizStore.answeredCount);
 
 	// Track selected choice from question-display
-	let selectedChoice = $state<number | null>(null);
-
-	// Sync selectedChoice with currentAnswer
-	$effect(() => {
-		if (currentAnswer) {
-			selectedChoice = currentAnswer.selectedChoice;
-		} else {
-			selectedChoice = null;
-		}
+	let selectedChoice = $derived.by<number | null>(() => {
+		return quizStore.state.userAnswers[currentQuestionIndex]?.selectedChoice ?? null;
 	});
+
+	$inspect('seected', selectedChoice);
 
 	const isAnswered = $derived(currentAnswer?.hasAnswered ?? false);
 	const progress = $derived((answeredCount / totalQuestions) * 100);
@@ -39,7 +34,7 @@
 	}
 </script>
 
-<div class="sticky bottom-0 border-t border-gray-200 bg-white shadow-lg">
+<div class="fixed bottom-0 left-0 right-0 z-50 border-t border-gray-200 bg-white shadow-lg">
 	<div class="mx-auto max-w-4xl px-4 py-4">
 		<div class="flex items-center justify-between gap-4">
 			<!-- Previous Button -->

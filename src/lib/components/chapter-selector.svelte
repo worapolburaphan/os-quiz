@@ -3,9 +3,10 @@
 
 	interface Props {
 		onStart: () => void;
+		onShowSessions: () => void;
 	}
 
-	let { onStart }: Props = $props();
+	let { onStart, onShowSessions }: Props = $props();
 
 	const chapters = Array.from({ length: 10 }, (_, i) => i + 1);
 	const allQuizzes = $derived(quizStore.state.allQuizzes);
@@ -40,6 +41,27 @@
 	<div class="space-y-4">
 		<h1 class="text-center text-3xl font-bold text-gray-900">แบบทดสอบระบบปฏิบัติการ</h1>
 		<p class="text-center text-gray-600">เลือกบทที่ต้องการทำแบบทดสอบ</p>
+		
+		<!-- Session History Button -->
+		<div class="flex justify-center">
+			<button
+				type="button"
+				onclick={onShowSessions}
+				class="flex items-center gap-2 rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50"
+			>
+				<svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+					<path
+						d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"
+					/>
+					<path
+						fill-rule="evenodd"
+						d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z"
+						clip-rule="evenodd"
+					/>
+				</svg>
+				ประวัติการทำแบบทดสอบ
+			</button>
+		</div>
 	</div>
 
 	<!-- Select All Toggle -->
@@ -62,7 +84,7 @@
 	</div>
 
 	<!-- Chapter List -->
-	<div class="grid gap-3 sm:grid-cols-2">
+	<div class="grid gap-3 sm:grid-cols-2 max-h-96 overflow-y-auto">
 		{#each chapters as chapter}
 			{@const isSelected = selectedChapters.includes(chapter)}
 			{@const questionCount = getQuestionCount(chapter)}

@@ -1,4 +1,5 @@
-import type { QuizData, QuizQuestion, UserAnswer, QuizState } from '$lib/types';
+import type { QuizData, QuizQuestion, UserAnswer, QuizState, QuizSession } from '$lib/types';
+import { saveSession, loadSession, generateSessionId } from '$lib/storage/session-storage';
 
 class QuizStore {
 	state = $state<QuizState>({
@@ -63,12 +64,23 @@ class QuizStore {
 		this.state.isQuizActive = true;
 		this.state.isQuizCompleted = false;
 
+		// Create new session
+		this.state.currentSessionId = generateSessionId();
+		this.autoSaveSession();
+
 		// Start timer if enabled
 		if (this.state.timer.enabled) {
 			this.state.timer.remainingSeconds = this.state.timer.durationMinutes * 60;
 			this.state.timer.isRunning = true;
 			this.startTimer();
 		}
+	}
+
+	// Select a choice (without submitting)
+	selectChoice(choiceIndex: number | null) {
+		const currentAnswer = this.state.userAnswers[this.state.currentQuestionIndex];
+		if (!currentAnswer || currentAnswer.hasAnswered) return;
+		currentAnswer.selectedChoice = choiceIndex;
 	}
 
 	// Submit answer for current question
@@ -80,6 +92,9 @@ class QuizStore {
 		currentAnswer.selectedChoice = choiceIndex;
 		currentAnswer.isCorrect = choiceIndex === correctAnswer;
 		currentAnswer.hasAnswered = true;
+
+		// Auto-save session after answering
+		this.autoSaveSession();
 	}
 
 	// Navigate to next question
@@ -110,6 +125,9 @@ class QuizStore {
 		this.state.isQuizCompleted = true;
 		this.state.isQuizActive = false;
 		this.stopTimer();
+
+		// Save completed session
+		this.autoSaveSession(true);
 	}
 
 	// Reset quiz
@@ -120,11 +138,104 @@ class QuizStore {
 		this.state.currentQuestionIndex = 0;
 		this.state.combinedQuestions = [];
 		this.state.userAnswers = [];
+		this.state.currentSessionId = undefined;
 		this.stopTimer();
 		this.state.timer.enabled = false;
 		this.state.timer.durationMinutes = 5;
 		this.state.timer.remainingSeconds = 0;
 		this.state.timer.isRunning = false;
+	}
+
+	// Start retry quiz with only incorrect questions
+	startRetryIncorrect() {
+		// Get incorrect questions
+		const incorrectIndices = this.state.userAnswers
+			.filter((a) => a.hasAnswered && a.isCorrect === false)
+			.map((a) => a.questionIndex);
+
+		if (incorrectIndices.length === 0) return;
+
+		// Filter combined questions to only incorrect ones
+		this.state.combinedQuestions = incorrectIndices.map(
+			(index) => this.state.combinedQuestions[index]
+		);
+
+		// Reset user answers for retry
+		this.state.userAnswers = this.state.combinedQuestions.map((_, index) => ({
+			questionIndex: index,
+			selectedChoice: null,
+			isCorrect: null,
+			hasAnswered: false
+		}));
+
+		this.state.currentQuestionIndex = 0;
+		this.state.isQuizActive = true;
+		this.state.isQuizCompleted = false;
+
+		// Create new retry session
+		this.state.currentSessionId = generateSessionId();
+		this.autoSaveSession();
+
+		// Disable timer for retry
+		this.state.timer.enabled = false;
+		this.state.timer.isRunning = false;
+	}
+
+	// Auto-save session
+	private autoSaveSession(isCompleted = false) {
+		if (!this.state.currentSessionId) return;
+
+		const session: QuizSession = {
+			id: this.state.currentSessionId,
+			timestamp: parseInt(this.state.currentSessionId.split('_')[1] || Date.now().toString()),
+			selectedChapters: this.state.selectedChapters,
+			combinedQuestions: this.state.combinedQuestions,
+			userAnswers: this.state.userAnswers,
+			score: this.score,
+			totalQuestions: this.totalQuestions,
+			scorePercentage: this.scorePercentage,
+			isCompleted,
+			completedAt: isCompleted ? Date.now() : undefined
+		};
+
+		saveSession(session).catch((error) => {
+			console.error('Failed to save session:', error);
+		});
+	}
+
+	// Load existing session
+	async loadExistingSession(sessionId: string): Promise<boolean> {
+		try {
+			const session = await loadSession(sessionId);
+			if (!session) return false;
+
+			// Restore session state
+			this.state.selectedChapters = session.selectedChapters;
+			this.state.combinedQuestions = session.combinedQuestions;
+			this.state.userAnswers = session.userAnswers;
+			this.state.currentSessionId = session.id;
+			this.state.isQuizActive = !session.isCompleted;
+			this.state.isQuizCompleted = session.isCompleted;
+			this.state.currentQuestionIndex = 0;
+
+			return true;
+		} catch (error) {
+			console.error('Failed to load session:', error);
+			return false;
+		}
+	}
+
+	// Start fresh quiz with same chapters as existing session
+	async retrySessionChapters(sessionId: string) {
+		try {
+			const session = await loadSession(sessionId);
+			if (!session) return;
+
+			this.state.selectedChapters = session.selectedChapters;
+			this.startQuiz();
+		} catch (error) {
+			console.error('Failed to retry session:', error);
+		}
 	}
 
 	// Timer functions
@@ -205,6 +316,15 @@ class QuizStore {
 	get scorePercentage(): number {
 		if (this.answeredCount === 0) return 0;
 		return Math.round((this.score / this.answeredCount) * 100);
+	}
+
+	get incorrectAnswers(): UserAnswer[] {
+		return this.state.userAnswers.filter((a) => a.hasAnswered && a.isCorrect === false);
+	}
+
+	get incorrectPercentage(): number {
+		if (this.answeredCount === 0) return 0;
+		return Math.round((this.incorrectAnswers.length / this.answeredCount) * 100);
 	}
 }
 

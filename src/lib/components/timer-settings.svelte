@@ -8,9 +8,8 @@
 	let { onTimerToggle }: Props = $props();
 
 	const timerEnabled = $derived(quizStore.state.timer.enabled);
-	const timerDuration = $derived(quizStore.state.timer.durationMinutes);
 
-	let durationInput = $state(timerDuration);
+	let durationInput = $state(quizStore.state.timer.durationMinutes);
 
 	function handleToggle() {
 		quizStore.toggleTimer();
@@ -25,7 +24,7 @@
 	}
 </script>
 
-<div class="rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
+<div class="rounded-lg border border-gray-200 bg-white/10 backdrop-blur-xl p-4 shadow-sm">
 	<div class="flex items-center justify-between">
 		<div>
 			<h3 class="font-semibold text-gray-900">ตั้งเวลา (ท้าทายตัวเอง)</h3>
@@ -34,6 +33,7 @@
 		<button
 			type="button"
 			onclick={handleToggle}
+			aria-label={timerEnabled ? 'ปิดใช้งานตัวจับเวลา' : 'เปิดใช้งานตัวจับเวลา'}
 			class="relative inline-flex h-6 w-11 items-center rounded-full transition-colors {timerEnabled
 				? 'bg-blue-600'
 				: 'bg-gray-200'}"

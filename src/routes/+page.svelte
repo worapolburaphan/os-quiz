@@ -10,9 +10,11 @@
 	import QuestionDisplay from '$lib/components/question-display.svelte';
 	import NavigationControls from '$lib/components/navigation-controls.svelte';
 	import ResultsSummary from '$lib/components/results-summary.svelte';
+	import SessionManager from '$lib/components/session-manager.svelte';
 
 	let isLoading = $state(true);
 	let loadError = $state<string | null>(null);
+	let showSessionManager = $state(false);
 
 	const isQuizActive = $derived(quizStore.state.isQuizActive);
 	const isQuizCompleted = $derived(quizStore.state.isQuizCompleted);
@@ -44,10 +46,18 @@
 	function handleRestart() {
 		quizStore.resetQuiz();
 	}
+
+	function handleShowSessions() {
+		showSessionManager = true;
+	}
+
+	function handleCloseSessions() {
+		showSessionManager = false;
+	}
 </script>
 
 <svelte:head>
-	<title>แบบทดสอบระบบปฏิบัติการ</title>
+	<title>OS QUIZ</title>
 	<meta name="description" content="แบบทดสอบระบบปฏิบัติการ OS Quiz" />
 </svelte:head>
 
@@ -80,8 +90,8 @@
 	{:else if !isQuizActive && !isQuizCompleted}
 		<!-- Chapter Selection Screen -->
 		<div class="py-8">
-			<ChapterSelector onStart={handleStartQuiz} />
-			<div class="mx-auto mt-6 max-w-2xl px-4">
+			<ChapterSelector onStart={handleStartQuiz} onShowSessions={handleShowSessions} />
+			<div class="sticky bottom-4 mx-auto mt-6 max-w-2xl px-4">
 				<TimerSettings />
 			</div>
 		</div>
@@ -105,3 +115,9 @@
 		</div>
 	{/if}
 </div>
+
+<!-- Session Manager Modal -->
+{#if showSessionManager}
+	<SessionManager onClose={handleCloseSessions} />
+{/if}
+
